@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         printf("You have to enter file name: ./Show <filename>\n");
         exit(1);
     }
-// very long striiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing    
+// very long striiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing
     FILE * fp;
     char * line = NULL;
     size_t len = 0;
@@ -45,14 +45,24 @@ int main(int argc, char *argv[]) {
     
     for(int i = 0; i < LINES - 2 * DY - 3; ++i) {
         if ((read = getline(&line, &len, fp)) != -1) {
+            if (len > COLS - 2 * DX - 3) {
+                line[COLS - 2 * DX - 3] = '\n';
+                line[COLS - 2 * DX - 2] = '\0';
+            }
             wprintw(win, "%s", line);
         } else {
             break;
         }
     }
 
+// very long striiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing
     while((c = wgetch(win)) != ESC) {
         if (c == SPACE && (read = getline(&line, &len, fp)) != -1) {
+            if (len > COLS - 2 * DX - 3) {
+                line[COLS - 2 * DX - 3] = '\n';
+                line[COLS - 2 * DX - 2] = '\0';
+            }
+
             wprintw(win, "%s", line);
         }
     }
