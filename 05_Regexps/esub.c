@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     }
 
     bags = calloc(regex.re_nsub + 1, sizeof(regmatch_t));
-
+    
     if (!regexec(&regex, argv[3], regex.re_nsub + 1, bags, 0))
     {
         int b = bags[0].rm_so, e = bags[0].rm_eo;
@@ -41,9 +41,26 @@ int main(int argc, char *argv[])
         while (i < slen) {
             if (argv[2][i] == '\\' && i < slen - 1 && isdigit(argv[2][i + 1])) {
                 int bl = bags[argv[2][i + 1] - '0'].rm_so, el = bags[argv[2][i + 1] - '0'].rm_eo;
+		
+		if (bl == -1) {
+			printf("Invalid back reference\n");
+			free(subst_res);
+			free(bags);
+			regfree(&regex);
+			exit(1);
+		}
                 for (int k = bl; k < el; ++k) {
                     if (j == size_res - 1) {
-                        subst_res = realloc(subst_res, size_res * 2);
+			char *tmp = realloc(subst_res, size_res * 2);
+			if (!tmp) {
+			    printf("Realloc failed\n");
+			    free(subst_res);
+			    free(bags);
+			    regfree(&regex);
+			    exit(1);
+		        }
+		    	subst_res = tmp;
+			size_res *= 2;
                     }
                     subst_res[j] = argv[3][k];
                     ++j;
@@ -51,8 +68,17 @@ int main(int argc, char *argv[])
 		++i;
             } else {
                 if (j == size_res - 1) {
-                    subst_res = realloc(subst_res, size_res * 2);
-                }
+                    char *tmp  = realloc(subst_res, size_res * 2);
+		    if (!tmp) {
+			printf("Realloc failed\n");
+			free(subst_res);
+			free(bags);
+			regfree(&regex);
+			exit(1);
+		    }
+		    subst_res = tmp;
+		    size_res *= 2;
+		}
                 subst_res[j] = argv[2][i];
                 ++j;
             }
