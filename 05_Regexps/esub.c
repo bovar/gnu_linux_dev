@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     {
         printf("Too few arguements\n");
         printf("Usage: ./esub <regexp> <substitution> <string>\n");
-        exit(1);
+        exit(0);
     }
 
     regex_t regex;
@@ -22,13 +22,14 @@ int main(int argc, char *argv[])
     {
         char buf[1024];
         regerror(status, &regex, buf, sizeof(buf));
-        printf("%s\n", buf);
+        fprintf(stderr, "%s\n", buf);
         exit(1);
     }
 
     bags = calloc(regex.re_nsub + 1, sizeof(regmatch_t));
     
-    if (!regexec(&regex, argv[3], regex.re_nsub + 1, bags, 0))
+    status = regexec(&regex, argv[3], regex.re_nsub + 1, bags, 0);
+    if (!status)
     {
         int b = bags[0].rm_so, e = bags[0].rm_eo;
 
@@ -40,10 +41,11 @@ int main(int argc, char *argv[])
         int j = 0;
         while (i < slen) {
             if (argv[2][i] == '\\' && i < slen - 1 && isdigit(argv[2][i + 1])) {
-                int bl = bags[argv[2][i + 1] - '0'].rm_so, el = bags[argv[2][i + 1] - '0'].rm_eo;
+                int bag_id = argv[2][i + 1] - '0';
+		int bl = bags[bag_id].rm_so, el = bags[bag_id].rm_eo;
 		
-		if (bl == -1) {
-			printf("Invalid back reference\n");
+		if (bag_id > regex.re_nsub || bag_id < 1 || bl == -1) {
+			fprintf(stderr, "Invalid back reference\n");
 			free(subst_res);
 			free(bags);
 			regfree(&regex);
@@ -53,7 +55,7 @@ int main(int argc, char *argv[])
                     if (j == size_res - 1) {
 			char *tmp = realloc(subst_res, size_res * 2);
 			if (!tmp) {
-			    printf("Realloc failed\n");
+			    fprintf(stderr, "Realloc failed\n");
 			    free(subst_res);
 			    free(bags);
 			    regfree(&regex);
@@ -70,7 +72,7 @@ int main(int argc, char *argv[])
                 if (j == size_res - 1) {
                     char *tmp  = realloc(subst_res, size_res * 2);
 		    if (!tmp) {
-			printf("Realloc failed\n");
+			fprintf(stderr, "Realloc failed\n");
 			free(subst_res);
 			free(bags);
 			regfree(&regex);
@@ -88,6 +90,15 @@ int main(int argc, char *argv[])
 
         printf("%.*s%s%s\n", b, argv[3], subst_res, argv[3] + e);
         free(subst_res);
+    } else if (status == REG_NOMATCH) {
+	printf("%s\n", argv[3]);
+    } else {
+	char buf[1024];
+        regerror(status, &regex, buf, sizeof(buf));
+        fprintf(stderr, "%s\n", buf);
+	regfree(&regex);
+	free(bags);
+        exit(1);
     }
 
     free(bags);
