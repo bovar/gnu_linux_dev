@@ -15,3 +15,6 @@ test:
 	echo -n 'aaa' | sha1sum | cut -d ' ' -f 1  > test2_answ.txt
 	@cmp test2.txt test2_answ.txt
 	@echo "-----Test2_passed-----"
+
+clean:
+	git clean -df
