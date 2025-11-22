@@ -5,7 +5,22 @@
 #define SIZE 6
 #define MAZE_SIZE (SIZE * 2 + 1)
 
-void print_mat(char m[MAZE_SIZE][MAZE_SIZE]) {
+char **alloc_matrix(size_t sz) {
+  char **mat = (char **)calloc(sz, sizeof(char *));
+  for (size_t i = 0; i < sz; ++i) {
+    mat[i] = (char *)calloc(sz, sizeof(char));
+  }
+  return mat;
+}
+
+void free_matrix(char **mat, size_t sz) {
+  for (size_t i = 0; i < sz; ++i) {
+    free(mat[i]);
+  }
+  free(mat);
+}
+
+void print_mat(char **m) {
   for (int i = 0; i < MAZE_SIZE; ++i) {
     for (int j = 0; j < MAZE_SIZE; ++j) {
       printf("%c", m[i][j]);
@@ -14,7 +29,7 @@ void print_mat(char m[MAZE_SIZE][MAZE_SIZE]) {
   }
 }
 
-void init(char m[MAZE_SIZE][MAZE_SIZE]) {
+void init(char **m) {
   for (int i = 0; i < MAZE_SIZE; ++i) {
     for (int j = 0; j < MAZE_SIZE; ++j) {
       m[i][j] = ((j % 2 == 0) || (i % 2 == 0)) ? '#' : '.';
@@ -22,10 +37,9 @@ void init(char m[MAZE_SIZE][MAZE_SIZE]) {
   }
 }
 
-int dfs(int row, int col, char visited[SIZE][SIZE],
-        char m[MAZE_SIZE][MAZE_SIZE]) {
-  if (visited[row][col] == 1 || row < 0 || row >= SIZE || col < 0 ||
-      col >= SIZE) {
+int dfs(int row, int col, char **visited, char **m) {
+  if (row < 0 || row >= SIZE || col < 0 || col >= SIZE ||
+      visited[row][col] == 1) {
     return 0;
   }
 
@@ -55,8 +69,8 @@ int dfs(int row, int col, char visited[SIZE][SIZE],
   return 1;
 }
 
-void create_maze(char m[MAZE_SIZE][MAZE_SIZE]) {
-  char visited[SIZE][SIZE];
+void create_maze(char **m) {
+  char **visited = alloc_matrix(SIZE);
   for (int i = 0; i < SIZE; ++i) {
     for (int j = 0; j < SIZE; ++j) {
       visited[i][j] = 0;
@@ -64,15 +78,14 @@ void create_maze(char m[MAZE_SIZE][MAZE_SIZE]) {
   }
 
   dfs(0, 0, visited, m);
-
-  return;
+  free_matrix(visited, SIZE);
 }
 
 int main() {
   srand(time(NULL));
-  char maze[MAZE_SIZE][MAZE_SIZE];
-
+  char **maze = alloc_matrix(MAZE_SIZE);
   init(maze);
   create_maze(maze);
   print_mat(maze);
+  free_matrix(maze, MAZE_SIZE);
 }
