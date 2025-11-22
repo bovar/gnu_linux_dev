@@ -1,0 +1,63 @@
+--- main.c	2025-11-22 12:25:48.164570604 +0300
++++ patch2.c	2025-11-22 12:25:36.982330157 +0300
+@@ -2,6 +2,9 @@
+ #include <stdlib.h>
+ #include <time.h>
+ 
++char wall = '#';
++char room = '.';
++
+ char **alloc_matrix(size_t sz) {
+   char **mat = (char **)calloc(sz, sizeof(char *));
+   for (size_t i = 0; i < sz; ++i) {
+@@ -29,7 +32,7 @@
+ void init(char **m, size_t sz) {
+   for (size_t i = 0; i < sz; ++i) {
+     for (size_t j = 0; j < sz; ++j) {
+-      m[i][j] = ((j % 2 == 0) || (i % 2 == 0)) ? '#' : '.';
++      m[i][j] = ((j % 2 == 0) || (i % 2 == 0)) ? wall : room;
+     }
+   }
+ }
+@@ -51,16 +54,16 @@
+ 
+   for (size_t i = 0; i < 4; ++i) {
+     if (seq[i] == 0 && dfs(row + 1, col, visited, vis_size, maze) == 1) {
+-      maze[2 * row + 2][2 * col + 1] = '.';
++      maze[2 * row + 2][2 * col + 1] = room;
+     }
+     if (seq[i] == 1 && dfs(row, col + 1, visited, vis_size, maze) == 1) {
+-      maze[2 * row + 1][2 * col + 2] = '.';
++      maze[2 * row + 1][2 * col + 2] = room;
+     }
+     if (seq[i] == 2 && dfs(row - 1, col, visited, vis_size, maze) == 1) {
+-      maze[2 * row][2 * col + 1] = '.';
++      maze[2 * row][2 * col + 1] = room;
+     }
+     if (seq[i] == 3 && dfs(row, col - 1, visited, vis_size, maze) == 1) {
+-      maze[2 * row + 1][2 * col] = '.';
++      maze[2 * row + 1][2 * col] = room;
+     }
+   }
+   return 1;
+@@ -81,15 +84,17 @@
+ int main(int argc, char *argv[]) {
+ 
+   size_t vsize;
+-  if (argc == 2) {
+-    int sz = atoi(argv[1]);
++  if (argc == 3) {
++    wall = argv[1][1];
++    room = argv[1][0];
++    int sz = atoi(argv[2]);
+     if (sz <= 0) {
+       fprintf(stderr, "Size must be > 0");
+       exit(1);
+     }
+     vsize = (size_t)sz;
+   } else {
+-    fprintf(stderr, "Too few arguements. Usage ./main <size>\n");
++    fprintf(stderr, "Too few arguements. Usage ./main <chars> <size>\n");
+     exit(1);
+   }
+   size_t maze_size = vsize * 2 + 1;
