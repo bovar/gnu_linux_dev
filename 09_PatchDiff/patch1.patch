@@ -1,0 +1,45 @@
+--- main.c	2025-11-22 12:18:35.179134714 +0300
++++ patch1.c	2025-11-22 12:18:28.058898458 +0300
+@@ -2,9 +2,6 @@
+ #include <stdlib.h>
+ #include <time.h>
+ 
+-#define SIZE 6
+-#define MAZE_SIZE (SIZE * 2 + 1)
+-
+ char **alloc_matrix(size_t sz) {
+   char **mat = (char **)calloc(sz, sizeof(char *));
+   for (size_t i = 0; i < sz; ++i) {
+@@ -81,13 +78,29 @@
+   free_matrix(visited, sz);
+ }
+ 
+-int main() {
+-  size_t maze_size = MAZE_SIZE;
+-  size_t vsize = SIZE;
++int main(int argc, char *argv[]) {
++
++  size_t vsize;
++  if (argc == 2) {
++    int sz = atoi(argv[1]);
++    if (sz <= 0) {
++      fprintf(stderr, "Size must be > 0");
++      exit(1);
++    }
++    vsize = (size_t)sz;
++  } else {
++    fprintf(stderr, "Too few arguements. Usage ./main <size>\n");
++    exit(1);
++  }
++  size_t maze_size = vsize * 2 + 1;
++
+   srand(time(NULL));
++
+   char **maze = alloc_matrix(maze_size);
+   init(maze, maze_size);
+   create_maze(maze, vsize);
++
+   print_mat(maze, maze_size);
++
+   free_matrix(maze, maze_size);
+ }
