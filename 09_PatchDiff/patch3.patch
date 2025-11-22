@@ -1,0 +1,28 @@
+--- main.c	2025-11-22 12:25:56.706752840 +0300
++++ patch3.c	2025-11-22 12:27:52.118102771 +0300
+@@ -84,10 +84,12 @@
+ int main(int argc, char *argv[]) {
+ 
+   size_t vsize;
+-  if (argc == 3) {
+-    wall = argv[1][1];
+-    room = argv[1][0];
+-    int sz = atoi(argv[2]);
++  if (argc == 4) {
++    int seed = atoi(argv[1]);
++    srand(seed);
++    wall = argv[2][1];
++    room = argv[2][0];
++    int sz = atoi(argv[3]);
+     if (sz <= 0) {
+       fprintf(stderr, "Size must be > 0");
+       exit(1);
+@@ -99,8 +101,6 @@
+   }
+   size_t maze_size = vsize * 2 + 1;
+ 
+-  srand(time(NULL));
+-
+   char **maze = alloc_matrix(maze_size);
+   init(maze, maze_size);
+   create_maze(maze, vsize);
