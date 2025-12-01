@@ -1,4 +1,4 @@
-SUBDIRS = src
+SUBDIRS = src tests
 
-demo: all
-	./src/tests
+checklog: check
+	cat tests/*.log

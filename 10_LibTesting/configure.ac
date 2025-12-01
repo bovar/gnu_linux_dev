@@ -3,17 +3,21 @@
 
 AC_PREREQ([2.71])
 AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
-AC_CONFIG_SRCDIR([src/buf.c])
-AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([foreign])
+LT_INIT([disable-static])
+AC_CONFIG_SRCDIR([src/buf.h])
+AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
 AC_PROG_CC
 
+PKG_CHECK_MODULES([CHECK], [check])
+AC_SUBST(CK_VERBOSITY, verbose)
+AC_ARG_VAR(CK_VERBOSITY, [Default: "verbose", can be "silent", "minimal" or "normal")])
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([stdint.h sys/time.h])
+AC_CHECK_HEADERS([stddef.h stdlib.h string.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
@@ -27,5 +31,6 @@ AC_FUNC_REALLOC
 AC_CHECK_FUNCS([gettimeofday strtoull])
 
 AC_CONFIG_FILES([Makefile
+                 tests/Makefile
                  src/Makefile])
 AC_OUTPUT
