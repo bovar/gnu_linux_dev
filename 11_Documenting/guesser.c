@@ -1,8 +1,29 @@
+/** @mainpage Guesser program
+ * 
+ * This is program that guess your number between 1 and 100.
+ * 
+ * The main() function asks you to chose the number and then guesses it asks if your number is greater then something.
+ * 
+ * You can run program in Roman number mode just pass -r. 
+ * 
+*/
+/** @page Guesser program
+ * This is program that guess your number between 1 and 100.
+ * 
+ * Argument --help Show help info
+ * Argument -r run roman numbers mode
+*
+*/
+
 #include "config.h"
 #include <libintl.h>
 #include <locale.h>
 #include <stdio.h>
 #include <string.h>
+
+/** @file guesser.c
+* Implementation
+*/
 
 #define _(STRING) gettext(STRING)
 #define LOCALPATH "."
@@ -16,6 +37,10 @@ const char *r[NUM_OF_ROMANS] = {
     "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
 };
 
+/** Return a roman number of @p n
+ * @param n arabic numeral
+ * @return Roman number
+*/
 const char* d2r(int n) {
   return r[n];
 }
