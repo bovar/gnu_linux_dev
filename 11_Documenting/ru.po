@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: main 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-07 01:06+0300\n"
+"POT-Creation-Date: 2025-12-07 20:46+0000\n"
 "PO-Revision-Date: 2025-11-17 11:24+0300\n"
 "Last-Translator: Geronjin <geronjin@geronjin-hp-pavilion-gaming-laptop-15-"
 "dk1xxx>\n"
@@ -19,65 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: guesser.c:40
+#: guesser.c:78
 #, c-format
 msgid "Usage ./guesser [options]\n"
 msgstr "Запуск ./guesser [опции]\n"
 
-#: guesser.c:41
+#: guesser.c:79
 #, c-format
 msgid "Options:\n"
 msgstr "Опции:\n"
 
-#: guesser.c:42
+#: guesser.c:80
 #, c-format
 msgid "\t-r\tUse Roman numbers.\n"
 msgstr "\t-r\tИспользовать римские числа.\n"
 
-#: guesser.c:43
+#: guesser.c:81
 #, c-format
 msgid "\t--help\tDisplay this information.\n"
 msgstr "\t--help\tВывести эту информацию.\n"
 
-#: guesser.c:48
+#: guesser.c:86
 #, c-format
 msgid "Guess the number from I to C\n"
 msgstr "Загадайте число от I до C\n"
 
-#: guesser.c:50
+#: guesser.c:88
 #, c-format
 msgid "Guess the number from 1 to 100\n"
 msgstr "Загадайте число от 1 до 100\n"
 
-#: guesser.c:57
+#: guesser.c:95
 #, c-format
 msgid "Is your number greater than %s? (yes/no)\n"
 msgstr "Ваше число больше чем %s? (да/нет)\n"
 
-#: guesser.c:59
+#: guesser.c:97
 #, c-format
 msgid "Is your number greater than %d? (yes/no)\n"
 msgstr "Ваше число больше чем %d? (да/нет)\n"
 
-#: guesser.c:62
+#: guesser.c:102
 msgid "yes"
 msgstr "да"
 
-#: guesser.c:64
+#: guesser.c:104
 msgid "no"
 msgstr "нет"
 
-#: guesser.c:67
+#: guesser.c:107
 #, c-format
 msgid "Wrong answer. Say \"yes\" or \"no\"\n"
 msgstr "Неправильный формат ответа. Введите \"да\" или \"нет\"\n"
 
-#: guesser.c:71
+#: guesser.c:111
 #, c-format
 msgid "Your number is %s\n"
 msgstr "Ваше число %s\n"
 
-#: guesser.c:73
+#: guesser.c:113
 #, c-format
 msgid "Your number is %d\n"
 msgstr "Ваше число %d\n"
