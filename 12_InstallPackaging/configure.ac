@@ -3,10 +3,11 @@
 
 AC_PREREQ([2.71])
 AC_INIT([Guess number], [0.0.1], [mail@mail.su], [guesser])
-AC_CONFIG_SRCDIR([src/roman.h])
+AC_CONFIG_SRCDIR([guesser.c])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([foreign])
 LT_INIT([disable-static])
+DX_INIT_DOXYGEN([guesser])
 
 # Checks for programs.
 AC_PROG_CC
@@ -29,5 +30,5 @@ AC_CHECK_HEADERS([libintl.h])
 # Checks for library functions.
 AC_CHECK_FUNCS([setlocale])
 
-AC_CONFIG_FILES([Makefile tests/Makefile src/Makefile]) #Doxyfile
+AC_CONFIG_FILES([Makefile tests/Makefile src/Makefile Doxyfile]) #Doxyfile
 AC_OUTPUT
