@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.71])
-AC_INIT([Guess number], [0.0.1], [mail@mail.su], [guesser])
-AC_CONFIG_SRCDIR([guesser.c])
+AC_INIT([guesser], [0.0.1], [mail@mail.su], [guesser])
+AC_CONFIG_SRCDIR([src/guesser.c])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([foreign])
 LT_INIT([disable-static])
