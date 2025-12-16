@@ -3,11 +3,17 @@
 
 AC_PREREQ([2.71])
 AC_INIT([guesser], [0.0.1], [mail@mail.su], [guesser])
+
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_REQUIRE_VERSION(0.21)
+
 AC_CONFIG_SRCDIR([src/guesser.c])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([foreign])
 LT_INIT([disable-static])
 DX_INIT_DOXYGEN([guesser])
+
+ALL_LINGUAS="ru"
 
 # Checks for programs.
 AC_PROG_CC
@@ -30,5 +36,5 @@ AC_CHECK_HEADERS([libintl.h])
 # Checks for library functions.
 AC_CHECK_FUNCS([setlocale])
 
-AC_CONFIG_FILES([Makefile tests/Makefile src/Makefile Doxyfile]) #Doxyfile
+AC_CONFIG_FILES([Makefile po/Makefile.in tests/Makefile src/Makefile Doxyfile]) #Doxyfile
 AC_OUTPUT

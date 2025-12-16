@@ -4,9 +4,9 @@ SUBDIRS = src tests
 
 all-local:	doxygen-doc
 
-doxygen-doc/man/man1/guesser.1:	doxygen-doc
+doxygen-doc/man/man1/guesser.c.1:	doxygen-doc
 
-man1_MANS = doxygen-doc/man/man1/guesser.1
+man1_MANS = doxygen-doc/man/man1/guesser.c.1
 
 install-data-local:
 	mkdir -p $(DESTDIR)/$(docdir)

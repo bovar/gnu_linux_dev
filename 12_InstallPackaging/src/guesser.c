@@ -29,7 +29,6 @@
  */
 
 #define _(STRING) gettext(STRING)
-#define LOCALPATH "."
 
 
 
@@ -40,7 +39,7 @@
  */
 int main(int argc, char* argv[]) {
 	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALPATH);
+	bindtextdomain(PACKAGE, LOCALE_PATH);
 	textdomain(PACKAGE);
 
 	int is_roman = 0;

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: main 0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-16 11:49+0000\n"
+"Report-Msgid-Bugs-To: mail@mail.su\n"
+"POT-Creation-Date: 2025-12-16 14:34+0000\n"
 "PO-Revision-Date: 2025-11-17 11:24+0300\n"
 "Last-Translator: Geronjin <geronjin@geronjin-hp-pavilion-gaming-laptop-15-"
 "dk1xxx>\n"
@@ -19,65 +19,65 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: guesser.c:51
+#: src/guesser.c:50
 #, c-format
 msgid "Usage ./guesser [options]\n"
 msgstr "Запуск ./guesser [опции]\n"
 
-#: guesser.c:52
+#: src/guesser.c:51
 #, c-format
 msgid "Options:\n"
 msgstr "Опции:\n"
 
-#: guesser.c:53
+#: src/guesser.c:52
 #, c-format
 msgid "\t-r\tUse Roman numbers.\n"
 msgstr "\t-r\tИспользовать римские числа.\n"
 
-#: guesser.c:54
+#: src/guesser.c:53
 #, c-format
 msgid "\t--help\tDisplay this information.\n"
 msgstr "\t--help\tВывести эту информацию.\n"
 
-#: guesser.c:59
+#: src/guesser.c:58
 #, c-format
 msgid "Guess the number from I to C\n"
 msgstr "Загадайте число от I до C\n"
 
-#: guesser.c:61
+#: src/guesser.c:60
 #, c-format
 msgid "Guess the number from 1 to 100\n"
 msgstr "Загадайте число от 1 до 100\n"
 
-#: guesser.c:68
+#: src/guesser.c:67
 #, c-format
 msgid "Is your number greater than %s? (yes/no)\n"
 msgstr "Ваше число больше чем %s? (да/нет)\n"
 
-#: guesser.c:70
+#: src/guesser.c:69
 #, c-format
 msgid "Is your number greater than %d? (yes/no)\n"
 msgstr "Ваше число больше чем %d? (да/нет)\n"
 
-#: guesser.c:75
+#: src/guesser.c:74
 msgid "yes"
 msgstr "да"
 
-#: guesser.c:77
+#: src/guesser.c:76
 msgid "no"
 msgstr "нет"
 
-#: guesser.c:80
+#: src/guesser.c:79
 #, c-format
 msgid "Wrong answer. Say \"yes\" or \"no\"\n"
 msgstr "Неправильный формат ответа. Введите \"да\" или \"нет\"\n"
 
-#: guesser.c:84
+#: src/guesser.c:83
 #, c-format
 msgid "Your number is %s\n"
 msgstr "Ваше число %s\n"
 
-#: guesser.c:86
+#: src/guesser.c:85
 #, c-format
 msgid "Your number is %d\n"
 msgstr "Ваше число %d\n"
